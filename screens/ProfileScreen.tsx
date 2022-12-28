@@ -2,14 +2,14 @@ import { StyleSheet } from "react-native";
 import React from "react";
 import { Box, Text } from "native-base";
 
-const TabTwoScreen = () => {
+const ProfileScreen = () => {
   return (
     <Box flex={1} alignSelf="center" justifyContent="center">
-      <Text fontSize="lg">Tab Two Screen</Text>
+      <Text fontSize="lg">Welcome to your shop..🙂 </Text>
     </Box>
   );
 };
 
-export default TabTwoScreen;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({});
