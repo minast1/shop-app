@@ -21,34 +21,56 @@ const BottomTabNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
+          tabBarLabelStyle: {
+            fontSize: 11,
+          },
+          tabBarActiveTintColor: "#eab308",
           headerShown: false,
-          tabBarIcon: () => (
-            <Ionicons name="home-outline" size={24} color="black" />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Ionicons name="home" size={25} color="#eab308" />
+            ) : (
+              <Ionicons name="home-outline" size={25} color="black" />
+            ),
         }}
       />
       <BottomTab.Screen
-        name="Profile"
+        name="Me"
         component={ProfileScreen}
         options={{
+          tabBarActiveTintColor: "#eab308",
+          tabBarLabelStyle: {
+            fontSize: 11,
+          },
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="user" size={24} color="black" />
-          ),
+
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <FontAwesome5 name="user-alt" size={24} color="#eab308" />
+            ) : (
+              <FontAwesome5 name="user" size={24} color="black" />
+            ),
         }}
       />
       <BottomTab.Screen
         name="Cart"
         component={CartScreen}
         options={{
+          tabBarActiveTintColor: "#eab308",
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="cart-outline"
-              size={24}
-              color="black"
-            />
-          ),
+          tabBarLabelStyle: {
+            fontSize: 11,
+          },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <MaterialCommunityIcons name="cart" size={25} color="#eab308" />
+            ) : (
+              <MaterialCommunityIcons
+                name="cart-outline"
+                size={25}
+                color="black"
+              />
+            ),
         }}
       />
     </BottomTab.Navigator>

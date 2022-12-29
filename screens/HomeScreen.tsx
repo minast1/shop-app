@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
 import React from "react";
-import { Box, Text } from "native-base";
+import { View } from "native-base";
+import Searchbar from "../components/Searchbar";
 
 const HomeScreen = () => {
   return (
-    <Box flex={1} alignSelf="center" justifyContent="center">
-      <Text fontSize="lg">Hiya Asmawu..How r u doing. 👋 </Text>
-    </Box>
+    <View flex={1} mt={16} mx="3">
+      <Searchbar />
+    </View>
   );
 };
 

@@ -1,28 +1,43 @@
+import "react-native-gesture-handler";
+
 import { NativeBaseProvider, extendTheme } from "native-base";
 import Navigation from "./navigation";
 import { StatusBar } from "expo-status-bar";
 import useLoadedAssets from "./hooks/useLoadedAssets";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   const isLoadingComplete = useLoadedAssets();
   const theme = extendTheme({
     colors: {
-      // Add new color
-      primary: {
-        50: "#FEFCE8",
-        100: "#FEF9C3",
-        200: "#FEF08A",
-        300: "#FDE047",
-        400: "#47A9DA",
-        500: "#0088CC",
-        600: "#007AB8",
-        700: "#006BA1",
+      custom: {
+        50: "#fefce8",
+        100: "#fef9c3",
+        200: "#fef08a",
+        300: "#fde047",
+        400: "#facc15",
+        500: "#eab308",
+        600: "#ca8a04",
+        700: "#a16207",
         800: "#005885",
         900: "#003F5E",
       },
-      // Redefining only one shade, rest of the color will remain same.
-      amber: {
-        400: "#d97706",
+    },
+    components: {
+      Button: {
+        defaultProps: {
+          colorScheme: "custom",
+        },
+        baseStyle: {
+          bg: "#eab308",
+          rounded: "lg",
+          bgColor: "#eab308",
+          _pressed: {
+            bg: "custom.600",
+            bgColor: "custom.600",
+          },
+          _text: {},
+        },
       },
     },
     config: {
@@ -34,9 +49,11 @@ export default function App() {
     return null;
   } else {
     return (
-      <NativeBaseProvider>
-        <Navigation />
-        <StatusBar />
+      <NativeBaseProvider theme={theme}>
+        <SafeAreaProvider>
+          <Navigation />
+          <StatusBar style="dark" />
+        </SafeAreaProvider>
       </NativeBaseProvider>
     );
   }

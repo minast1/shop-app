@@ -3,6 +3,7 @@
     "name": "Modest",
     "slug": "modest-app",
     "privacy": "public",
-    "description": "Modest by Asmay online shop"
+    "description": "Modest by Asmay online shop",
+    "owner": "eddy-modest"
   }
 }
