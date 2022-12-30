@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CartScreen from "../screens/CartScreen";
+import CategoryScreen from "../screens/CategoryScreen";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -31,6 +32,23 @@ const BottomTabNavigator = () => {
               <Ionicons name="home" size={25} color="#eab308" />
             ) : (
               <Ionicons name="home-outline" size={25} color="black" />
+            ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Categories"
+        component={CategoryScreen}
+        options={{
+          tabBarLabelStyle: {
+            fontSize: 11,
+          },
+          tabBarActiveTintColor: "#eab308",
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Ionicons name="grid" size={25} color="#eab308" />
+            ) : (
+              <Ionicons name="grid-outline" size={25} color="black" />
             ),
         }}
       />
