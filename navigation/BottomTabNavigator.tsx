@@ -1,14 +1,8 @@
 import { View, Text } from "react-native";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-  BottomTabScreenProps,
-  createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
-import {
-  createStackNavigator,
-  StackScreenProps,
-} from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
@@ -16,12 +10,13 @@ import ProfileScreen from "../screens/ProfileScreen";
 import CartScreen from "../screens/CartScreen";
 import CategoryScreen from "../screens/CategoryScreen";
 import SearchResultsScreen from "../screens/SearchResultsScreen";
-import {
-  combinedTypes,
-  HomeStackParamList,
-  HomeTabStackList,
-  TabParamList,
-} from "../src/types";
+import { TabParamList } from "../src/types";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import ClothScreen from "../screens/ClothScreen";
+import BagsScreen from "../screens/BagsScreen";
+import OthersScreen from "../screens/OthersScreen";
+import { LogBox } from "react-native";
+import { usePropsResolutionTest } from "native-base";
 
 const BottomTab = createBottomTabNavigator<TabParamList>();
 
@@ -29,6 +24,7 @@ const BottomTabNavigator = () => {
   return (
     <BottomTab.Navigator
       initialRouteName="HomeTab"
+
       //screenOptions={{ tabBarActiveTintColor: Colors[colorScheme].tint }}
     >
       <BottomTab.Screen
@@ -50,13 +46,15 @@ const BottomTabNavigator = () => {
       />
       <BottomTab.Screen
         name="Categories"
-        component={CategoryScreen}
+        component={CategoryNavigator}
         options={{
           tabBarLabelStyle: {
             fontSize: 11,
           },
+
           tabBarActiveTintColor: "#eab308",
-          headerShown: false,
+          headerStyle: { borderWidth: 0, elevation: 0, shadowOpacity: 0 },
+          headerTitleStyle: { display: "none" },
           tabBarIcon: ({ focused }) =>
             focused ? (
               <Ionicons name="grid" size={25} color="#eab308" />
@@ -126,23 +124,51 @@ const HomeNavigator = () => {
       <HomeStack.Screen
         name="Search"
         component={SearchResultsScreen}
-        options={{ headerTitle: "Search results here" }}
+        options={{ headerShown: false }}
       />
     </HomeStack.Navigator>
   );
 };
 
-const TabTwoStack = createStackNavigator();
+const CategoriesStack = createStackNavigator();
+const CategoriesTabs = createMaterialTopTabNavigator();
 
-function TabTwoNavigator() {
+function CategoriesTabsNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoNavigator}
-        options={{ headerTitle: "Tab Two Title" }}
+    <CategoriesTabs.Navigator
+      initialRouteName="Cloths"
+      screenOptions={{
+        swipeEnabled: false,
+        tabBarActiveTintColor: "#eab308",
+        tabBarInactiveTintColor: "black",
+        tabBarIndicatorStyle: {
+          backgroundColor: "#eab308",
+        },
+      }}
+    >
+      <CategoriesTabs.Screen name="Cloths" component={ClothScreen} />
+      <CategoriesTabs.Screen
+        name="Bags"
+        component={BagsScreen}
+        //  options={{ animationEnabled: false }}
       />
-    </TabTwoStack.Navigator>
+      <CategoriesTabs.Screen
+        name="Others"
+        component={OthersScreen}
+        // options={{ animationEnabled: false }}
+      />
+    </CategoriesTabs.Navigator>
+  );
+}
+function CategoryNavigator() {
+  return (
+    <CategoriesStack.Navigator initialRouteName="CategoriesTab">
+      <CategoriesStack.Screen
+        name="CategoriesTab"
+        component={CategoriesTabsNavigator}
+        options={{ headerShown: false }}
+      />
+    </CategoriesStack.Navigator>
   );
 }
 export default BottomTabNavigator;

@@ -6,6 +6,7 @@ import React from "react";
 import { Asset } from "expo-asset";
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 function cacheFonts(fonts: any[]) {
   return fonts.map((font) => Font.loadAsync(font));
@@ -31,6 +32,7 @@ const useLoadedAssets = () => {
         //Load fonts
         const fontAssets = cacheFonts([
           Ionicons.font,
+          Feather.font,
           FontAwesome.font,
           FontAwesome5.font,
           MaterialCommunityIcons.font,
