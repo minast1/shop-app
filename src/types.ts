@@ -1,9 +1,11 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { CompositeScreenProps } from "@react-navigation/native";
 import {
   createStackNavigator,
   StackScreenProps,
 } from "@react-navigation/stack";
+import { dataProps } from "./lib/api";
 
 export type HomeStackParamList = {
   Home: undefined;
@@ -30,4 +32,19 @@ export type combinedTypes = CompositeScreenProps<
     BottomTabScreenProps<TabParamList>
   >,
   StackScreenProps<HomeStackParamList>
+>;
+
+type MaterialTabsParamList = {
+  Cloths: undefined;
+  Bags: undefined;
+  Others: undefined;
+};
+
+export type CategoryStackList = {
+  CategoriesTab: undefined;
+  ProductDetail: dataProps;
+};
+export type CategoryStackParams = CompositeScreenProps<
+  MaterialTopTabScreenProps<MaterialTabsParamList>,
+  StackScreenProps<CategoryStackList, "CategoriesTab">
 >;

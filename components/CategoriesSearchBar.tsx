@@ -9,7 +9,8 @@ const CategoriesSearchBar = () => {
       borderRadius="full"
       alignItems="center"
       backgroundColor="gray.200"
-      w="100%"
+      w="96%"
+      mb="3"
     >
       <Icon
         ml="4"
@@ -18,12 +19,12 @@ const CategoriesSearchBar = () => {
         as={<Ionicons name="ios-search" />}
       />
       <Input
-        placeholder="Enter Key words"
+        placeholder="Search..."
         variant="unstyled"
         //isReadOnly={true}
         //onPressIn={() => navigation.navigate("Search")}
         fontSize="lg"
-        _input={{ color: "gray.500" }}
+        _input={{ color: "gray.300" }}
         width="63%"
         ml="2"
         px="2"

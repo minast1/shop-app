@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CartScreen from "../screens/CartScreen";
-import CategoryScreen from "../screens/CategoryScreen";
+import CategoryScreen from "../screens/DetailScreen";
 import SearchResultsScreen from "../screens/SearchResultsScreen";
 import { TabParamList } from "../src/types";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -17,6 +17,7 @@ import BagsScreen from "../screens/BagsScreen";
 import OthersScreen from "../screens/OthersScreen";
 import { LogBox } from "react-native";
 import { usePropsResolutionTest } from "native-base";
+import DetailScreen from "../screens/DetailScreen";
 
 const BottomTab = createBottomTabNavigator<TabParamList>();
 
@@ -53,7 +54,12 @@ const BottomTabNavigator = () => {
           },
 
           tabBarActiveTintColor: "#eab308",
-          headerStyle: { borderWidth: 0, elevation: 0, shadowOpacity: 0 },
+          headerStyle: {
+            borderWidth: 0,
+            elevation: 0,
+            shadowOpacity: 0,
+            height: 60,
+          },
           headerTitleStyle: { display: "none" },
           tabBarIcon: ({ focused }) =>
             focused ? (
@@ -168,6 +174,7 @@ function CategoryNavigator() {
         component={CategoriesTabsNavigator}
         options={{ headerShown: false }}
       />
+      <CategoriesStack.Screen name="ProductDetail" component={DetailScreen} />
     </CategoriesStack.Navigator>
   );
 }
