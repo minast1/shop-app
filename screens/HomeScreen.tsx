@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import React from "react";
-import { View, VStack } from "native-base";
+import { Pressable, View, VStack } from "native-base";
 import Searchbar from "../components/Searchbar";
 import MainCarousel from "../components/MainCarousel";
 import ContactBox from "../components/ContactBox";
@@ -12,6 +12,7 @@ const HomeScreen = () => {
     <>
       <VStack flex={1} mt={16} mx="3" space="5" pb="8">
         <Searchbar />
+
         <MainCarousel />
         <ContactBox />
       </VStack>
