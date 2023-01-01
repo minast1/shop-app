@@ -8,7 +8,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CartScreen from "../screens/CartScreen";
-import CategoryScreen from "../screens/DetailScreen";
 import SearchResultsScreen from "../screens/SearchResultsScreen";
 import { TabParamList } from "../src/types";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -146,6 +145,7 @@ function CategoriesTabsNavigator() {
       screenOptions={{
         swipeEnabled: false,
         tabBarActiveTintColor: "#eab308",
+
         tabBarInactiveTintColor: "black",
         tabBarIndicatorStyle: {
           backgroundColor: "#eab308",
@@ -174,7 +174,16 @@ function CategoryNavigator() {
         component={CategoriesTabsNavigator}
         options={{ headerShown: false }}
       />
-      <CategoriesStack.Screen name="ProductDetail" component={DetailScreen} />
+      <CategoriesStack.Screen
+        name="ProductDetail"
+        component={DetailScreen}
+        options={{
+          headerShown: false,
+          // headerTitleStyle: { display: "none" },
+          // headerLeftLabelVisible: false,
+          // headerL
+        }}
+      />
     </CategoriesStack.Navigator>
   );
 }

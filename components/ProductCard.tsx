@@ -20,9 +20,9 @@ const ProductCard = ({
             w="48"
             //borderWidth={1}
             h="72"
-            space="2"
-            overflow="hidden"
-            m="2"
+            space="1"
+            //overflow="hidden"
+            m="1"
             style={{ transform: [{ scale: isPressed ? 0.99 : 1 }] }}
           >
             <AspectRatio w="100%" ratio={16 / 18}>
@@ -34,7 +34,17 @@ const ProductCard = ({
               />
             </AspectRatio>
 
-            <Text>{title}</Text>
+            <Text isTruncated maxW="400" w="100%">
+              {title}
+            </Text>
+            <Text
+              fontSize="lg"
+              fontWeight="bold"
+              color="#eab308"
+              alignSelf="center"
+            >
+              ₵ {price}.00
+            </Text>
           </VStack>
         );
       }}
