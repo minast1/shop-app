@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
   StackScreenProps,
@@ -9,8 +9,15 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import { combinedTypes, RootParamList } from "../src/types";
 
 const Navigation = () => {
+  const navTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "white",
+    },
+  };
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navTheme}>
       <RootNavigator />
     </NavigationContainer>
   );

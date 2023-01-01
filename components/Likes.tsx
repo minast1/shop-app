@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Badge, Icon, IconButton, VStack } from "native-base";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
-const CartInfo = () => {
+//<FontAwesome name="heart" size={24} color="black" /> Use this when the product is liked
+const Likes = () => {
   return (
     <VStack mr="4">
       <Badge // bg="red.400"
@@ -18,18 +19,18 @@ const CartInfo = () => {
           fontSize: 10,
         }}
       >
-        0
+        5
       </Badge>
       <IconButton
         variant="unstyled"
         _icon={{ color: "black", size: 27 }}
         //onPress={() => navigation.navigate("Home")}
-        icon={<Icon as={MaterialCommunityIcons} name="cart-outline" />}
+        icon={<Icon as={FontAwesome} name="heart-o" />}
       />
     </VStack>
   );
 };
 
-export default CartInfo;
+export default Likes;
 
 const styles = StyleSheet.create({});

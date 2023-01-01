@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -14,8 +13,6 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import ClothScreen from "../screens/ClothScreen";
 import BagsScreen from "../screens/BagsScreen";
 import OthersScreen from "../screens/OthersScreen";
-import { LogBox } from "react-native";
-import { usePropsResolutionTest } from "native-base";
 import DetailScreen from "../screens/DetailScreen";
 
 const BottomTab = createBottomTabNavigator<TabParamList>();
@@ -166,6 +163,7 @@ function CategoriesTabsNavigator() {
     </CategoriesTabs.Navigator>
   );
 }
+
 function CategoryNavigator() {
   return (
     <CategoriesStack.Navigator initialRouteName="CategoriesTab">
