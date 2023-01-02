@@ -87,8 +87,6 @@ export default DetailScreen;
 
 const styles = StyleSheet.create({
   image: {
-    //width: 300,
-    // height: 400,
     alignSelf: "center",
     height: 450,
     width: 370,

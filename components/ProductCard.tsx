@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import { AspectRatio, Text, Image, Pressable, VStack } from "native-base";
+import { Text, Image, Pressable, VStack } from "native-base";
 import { dataProps } from "../src/lib/api";
 
 const ProductCard = ({
@@ -18,21 +18,17 @@ const ProductCard = ({
         return (
           <VStack
             w="48"
-            //borderWidth={1}
             h="72"
             space="1"
-            //overflow="hidden"
             m="1"
             style={{ transform: [{ scale: isPressed ? 0.99 : 1 }] }}
           >
-            <AspectRatio w="100%" ratio={16 / 18}>
-              <Image
-                //resizeMode="cover"
-                source={{ uri: image }}
-                alt={title}
-                //  style={styles.image}
-              />
-            </AspectRatio>
+            <Image
+              resizeMode="stretch"
+              source={{ uri: image }}
+              alt={title}
+              style={styles.image}
+            />
 
             <Text isTruncated maxW="400" w="100%">
               {title}
@@ -56,7 +52,7 @@ export default ProductCard;
 
 const styles = StyleSheet.create({
   image: {
-    width: 190,
-    height: 220,
+    width: 170,
+    height: 210,
   },
 });

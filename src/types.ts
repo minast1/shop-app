@@ -35,10 +35,16 @@ export type combinedTypes = CompositeScreenProps<
 >;
 
 type MaterialTabsParamList = {
-  Cloths: undefined;
+  Clothes: undefined;
   Bags: undefined;
+  Shoes: undefined;
   Others: undefined;
 };
+
+export type CarouselToCatgoriesParamList = CompositeScreenProps<
+  StackScreenProps<HomeStackParamList, "Home">,
+  MaterialTopTabScreenProps<MaterialTabsParamList>
+>;
 
 export type CategoryStackList = {
   CategoriesTab: undefined;

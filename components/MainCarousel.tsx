@@ -1,19 +1,23 @@
 import { Dimensions, ImageBackground, StyleSheet } from "react-native";
 import React from "react";
 import Carousel, { ICarouselInstance } from "react-native-reanimated-carousel";
-import { Image, View, Text } from "native-base";
+import { Image, View, Text, Pressable } from "native-base";
+import { useNavigation } from "@react-navigation/native";
+import { CarouselToCatgoriesParamList } from "../src/types";
 
-type dataType = { uri: any };
-
+type dataType = { uri: any; name: string };
+type navigationType = CarouselToCatgoriesParamList["navigation"];
 const MainCarousel = () => {
   const [data, setData] = React.useState<dataType[]>([
-    { uri: require("../assets/images/fash1.jpg") },
-    { uri: require("../assets/images/bg.webp") },
-    { uri: require("../assets/images/bg2.webp") },
-    { uri: require("../assets/images/shoe.jpeg") },
+    { uri: require("../assets/images/fash1.jpg"), name: "Clothes" },
+    { uri: require("../assets/images/bg.webp"), name: "Bags" },
+    { uri: require("../assets/images/bg2.webp"), name: "Shoes" },
+    { uri: require("../assets/images/shoe.jpeg"), name: "Others" },
   ]);
 
   const width = Dimensions.get("window").width;
+  const navigation = useNavigation<navigationType>();
+
   return (
     <Carousel
       width={width * 0.94}
@@ -26,15 +30,16 @@ const MainCarousel = () => {
       autoPlayInterval={2000}
       data={data}
       // pagingEnabled={isPagingEnabled}
-      renderItem={({ item, index }) => (
-        <View
+      renderItem={({ item: { uri, name }, index }) => (
+        <Pressable
+          onPress={() => navigation.navigate(name as any)}
           style={{
             flex: 1,
             justifyContent: "center",
           }}
         >
-          <ImageBackground source={item.uri} style={styles.image} />
-        </View>
+          <ImageBackground source={uri} style={styles.image} />
+        </Pressable>
       )}
     />
   );

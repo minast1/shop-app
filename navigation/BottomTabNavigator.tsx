@@ -14,6 +14,7 @@ import ClothScreen from "../screens/ClothScreen";
 import BagsScreen from "../screens/BagsScreen";
 import OthersScreen from "../screens/OthersScreen";
 import DetailScreen from "../screens/DetailScreen";
+import AccessoriesScreen from "../screens/AccessoriesScreen";
 
 const BottomTab = createBottomTabNavigator<TabParamList>();
 
@@ -138,7 +139,7 @@ const CategoriesTabs = createMaterialTopTabNavigator();
 function CategoriesTabsNavigator() {
   return (
     <CategoriesTabs.Navigator
-      initialRouteName="Cloths"
+      initialRouteName="Clothes"
       screenOptions={{
         swipeEnabled: false,
         tabBarActiveTintColor: "#eab308",
@@ -149,15 +150,20 @@ function CategoriesTabsNavigator() {
         },
       }}
     >
-      <CategoriesTabs.Screen name="Cloths" component={ClothScreen} />
+      <CategoriesTabs.Screen name="Clothes" component={ClothScreen} />
       <CategoriesTabs.Screen
         name="Bags"
         component={BagsScreen}
         //  options={{ animationEnabled: false }}
       />
       <CategoriesTabs.Screen
-        name="Others"
+        name="Shoes"
         component={OthersScreen}
+        // options={{ animationEnabled: false }}
+      />
+      <CategoriesTabs.Screen
+        name="Others"
+        component={AccessoriesScreen}
         // options={{ animationEnabled: false }}
       />
     </CategoriesTabs.Navigator>
