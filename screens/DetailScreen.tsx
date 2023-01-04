@@ -18,6 +18,7 @@ import { CategoryStackList } from "../src/types";
 import { Feather } from "@expo/vector-icons";
 import Likes from "../components/Likes";
 import { FontAwesome } from "@expo/vector-icons";
+import CartItem from "../components/CartItem";
 
 type StackProps = StackScreenProps<CategoryStackList, "ProductDetail">;
 type routeParams = StackProps["route"];
@@ -26,7 +27,7 @@ const DetailScreen = () => {
   const route = useRoute<routeParams>();
   const navigation = useNavigation<navigationParams>();
   const { id, title, category, image, description, price } = route.params;
-
+  const [cartItem, setCartItem] = React.useState(0);
   return (
     <>
       <HStack
@@ -45,7 +46,7 @@ const DetailScreen = () => {
         <Text fontSize="lg" textTransform="capitalize">
           {category}
         </Text>
-        <Likes />
+        <CartItem />
       </HStack>
       <ScrollView>
         <Box my="2" width="100%">
@@ -66,16 +67,27 @@ const DetailScreen = () => {
             ₵ {price}.00
           </Text>
           <Text>{description}</Text>
-          <HStack alignSelf="flex-end" space="3">
+          <HStack space="3">
+            <Likes />
+
             <Button
               w="20%"
+              ml="20"
               leftIcon={<FontAwesome name="phone" size={24} color="white" />}
             />
 
             <Button
-              w="20%"
-              leftIcon={<FontAwesome name="whatsapp" size={24} color="white" />}
-            />
+              w="35%"
+              _text={{ fontSize: "md" }}
+              onPress={() => {
+                //if user is logged in
+                //setCartItem(cartItem + 1) and update the user cart
+                //else
+                //navigation.navigate()
+              }}
+            >
+              Add To Cart
+            </Button>
           </HStack>
         </VStack>
       </ScrollView>

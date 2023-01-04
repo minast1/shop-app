@@ -7,6 +7,8 @@ import {
 } from "@react-navigation/stack";
 import BottomTabNavigator from "./BottomTabNavigator";
 import { combinedTypes, RootParamList } from "../src/types";
+import Login from "../screens/Login";
+import Register from "../screens/Register";
 
 const Navigation = () => {
   const navTheme = {
@@ -25,12 +27,18 @@ const Navigation = () => {
 
 // A root stack navigator is often used for displaying modals on top of all other content
 // Read more here: https://reactnavigation.org/docs/modal
-const Stack = createStackNavigator<{ Root: undefined }>();
+const Stack = createStackNavigator<{
+  Root: undefined;
+  Login: undefined;
+  Register: undefined;
+}>();
 
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 }

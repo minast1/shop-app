@@ -32,7 +32,7 @@ const MainCarousel = () => {
       // pagingEnabled={isPagingEnabled}
       renderItem={({ item: { uri, name }, index }) => (
         <Pressable
-          onPress={() => navigation.navigate(name as any)}
+          //onPress={() => navigation.navigate('Home',{screen: name as string })}
           style={{
             flex: 1,
             justifyContent: "center",
