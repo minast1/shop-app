@@ -25,14 +25,31 @@ import MainCarousel from "../components/MainCarousel";
 type StackProps = StackScreenProps<CategoryStackList, "ProductDetail">;
 type routeParams = StackProps["route"];
 type navigationParams = StackProps["navigation"];
+
 const DetailScreen = () => {
   const route = useRoute<routeParams>();
   const navigation = useNavigation<navigationParams>();
+  const [selectedSize, setSize] = React.useState<string | null>();
   const { id, title, category, image, description, price } = route.params;
   const data: carouselDataType[] = Array.from({ length: 4 }, (item, index) => {
     return { image: { uri: image } };
   });
-  //console.log(data);
+  const sizes = ["SM", "MD", "LG"];
+  const [quantity, setQuantity] = React.useState(1);
+  const increaseQuantity = React.useCallback(() => {
+    setQuantity(quantity + 1);
+  }, [quantity]);
+
+  const decreaseQuantity = React.useCallback(() => {
+    if (quantity == 0) {
+      return;
+    } else setQuantity(quantity - 1);
+  }, [quantity]);
+
+  const changeSelectedSizeButton = React.useCallback((item: string) => {
+    setSize(item);
+  }, []);
+
   const queryClient = useQueryClient();
   const updateCart = useMutation({
     mutationFn: getUserCart,
@@ -71,18 +88,65 @@ const DetailScreen = () => {
       <ScrollView>
         <Box my="2" width="100%">
           <MainCarousel carouselData={data} />
+          <HStack>
+            <Likes />
+          </HStack>
         </Box>
-        <VStack my="1" mx="2" flex={1} space="2">
+        <VStack mt="1" mb="3" mx="2" flex={1} space="2">
           <Text fontSize="lg" fontWeight="bold">
             {title}
           </Text>
           <Text fontSize="lg" fontWeight="bold" color="#eab308">
-            ₵ {price}.00
+            ₵ {price}
           </Text>
           <Text>{description}</Text>
-          <HStack space="3">
-            <Likes />
+          <VStack mt="3" space="3">
+            <Text fontWeight="bold">Available Sizes</Text>
+            <HStack space="2">
+              {sizes.map((item, index) => (
+                <Button
+                  variant="outline"
+                  onPress={() => changeSelectedSizeButton(item)}
+                  size="xs"
+                  key={index}
+                  _text={{ color: "black" }}
+                  w="15%"
+                  bg={item === selectedSize ? "#eab308" : "transparent"}
+                  borderRadius="xs"
+                >
+                  {item}
+                </Button>
+              ))}
+            </HStack>
+            <Text fontWeight="bold">Order Quantity</Text>
+            <HStack justifyContent="space-between" w="30%" alignItems="center">
+              <IconButton
+                variant="solid"
+                bg="#eab308"
+                onPress={decreaseQuantity}
+                _pressed={{ backgroundColor: "#ca8a04" }}
+                size="md"
+                _icon={{
+                  as: Feather,
+                  name: "minus",
+                }}
+              />
+              <Text fontSize="md">{quantity}</Text>
+              <IconButton
+                variant="solid"
+                bg="#eab308"
+                onPress={increaseQuantity}
+                _pressed={{ backgroundColor: "#ca8a04" }}
+                size="md"
+                _icon={{
+                  as: Feather,
+                  name: "plus",
+                }}
+              />
+            </HStack>
+          </VStack>
 
+          <HStack space="3" mt="8" justifyContent="flex-end">
             <Button
               w="20%"
               ml="20"
