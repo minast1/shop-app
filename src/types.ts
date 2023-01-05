@@ -7,6 +7,8 @@ import {
 } from "@react-navigation/stack";
 import { dataProps } from "./lib/api";
 
+export type carouselDataType = { image: { uri: any }; name?: string };
+
 export type HomeStackParamList = {
   Home: undefined;
   Search: undefined;
