@@ -89,7 +89,7 @@ const BottomTabNavigator = () => {
         component={CartScreen}
         options={{
           tabBarActiveTintColor: "#eab308",
-          headerShown: false,
+          headerShown: true,
           tabBarLabelStyle: {
             fontSize: 11,
           },

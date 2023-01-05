@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 export type dataProps = {
   id: number;
   title: string;
-  price: string;
+  price: number;
   image: string;
   description: string;
   category: string;
@@ -26,11 +26,11 @@ export type userCartProps = {
   products: dataProps[];
 };
 export async function getUserCart() {
-  let data;
-  try {
+  const data: dataProps[] = [];
+  /*try {
     data = await axios.get("https://fakestoreapi.com/carts/5");
   } catch (error: any) {
     throw new Error(error);
-  }
-  return data.data;
+  }*/
+  return data;
 }

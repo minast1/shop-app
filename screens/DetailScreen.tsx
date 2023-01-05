@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 import React from "react";
 import {
-  AspectRatio,
   Box,
   Button,
   HStack,
@@ -18,7 +17,9 @@ import { CategoryStackList } from "../src/types";
 import { Feather } from "@expo/vector-icons";
 import Likes from "../components/Likes";
 import { FontAwesome } from "@expo/vector-icons";
-import CartItem from "../components/CartItem";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { dataProps, getUserCart } from "../src/lib/api";
+import CartTotal from "../components/CartTotal";
 
 type StackProps = StackScreenProps<CategoryStackList, "ProductDetail">;
 type routeParams = StackProps["route"];
@@ -27,7 +28,22 @@ const DetailScreen = () => {
   const route = useRoute<routeParams>();
   const navigation = useNavigation<navigationParams>();
   const { id, title, category, image, description, price } = route.params;
-  const [cartItem, setCartItem] = React.useState(0);
+
+  const queryClient = useQueryClient();
+  const updateCart = useMutation({
+    mutationFn: getUserCart,
+    onMutate: async (product: dataProps) => {
+      // await queryClient.cancelQueries({ queryKey: ["cart"] });
+      const previousCartItems = queryClient.getQueryData<dataProps[]>(["cart"]);
+      if (previousCartItems) {
+        queryClient.setQueryData<dataProps[]>(
+          ["cart"],
+          [...previousCartItems, product]
+        );
+      }
+      return { previousCartItems };
+    },
+  });
   return (
     <>
       <HStack
@@ -46,7 +62,7 @@ const DetailScreen = () => {
         <Text fontSize="lg" textTransform="capitalize">
           {category}
         </Text>
-        <CartItem />
+        <CartTotal />
       </HStack>
       <ScrollView>
         <Box my="2" width="100%">
@@ -81,7 +97,14 @@ const DetailScreen = () => {
               _text={{ fontSize: "md" }}
               onPress={() => {
                 //if user is logged in
-                //setCartItem(cartItem + 1) and update the user cart
+                updateCart.mutate({
+                  id,
+                  title,
+                  category,
+                  image,
+                  description,
+                  price,
+                });
                 //else
                 //navigation.navigate()
               }}

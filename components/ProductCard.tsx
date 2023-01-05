@@ -39,7 +39,7 @@ const ProductCard = ({
               color="#eab308"
               alignSelf="center"
             >
-              ₵ {price}.00
+              ₵ {price}
             </Text>
           </VStack>
         );

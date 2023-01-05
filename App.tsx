@@ -56,6 +56,17 @@ export default function App() {
           _text: {},
         },
       },
+      Select: {
+        baseStyle: {
+          _customDropdownIconProps: {
+            color: "#eab308",
+            size: "5",
+          },
+          _focus: {
+            borderColor: "#eab308",
+          },
+        },
+      },
     },
     config: {
       // Changing initialColorMode to 'dark'
