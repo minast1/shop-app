@@ -97,7 +97,7 @@ const DetailScreen = () => {
             {title}
           </Text>
           <Text fontSize="lg" fontWeight="bold" color="#eab308">
-            ₵ {price}
+            GH₵ {price}
           </Text>
           <Text>{description}</Text>
           <VStack mt="3" space="3">

@@ -6,66 +6,91 @@ import {
   Image,
   Text,
   VStack,
-  Select,
-  CheckIcon,
+  IconButton,
+  Box,
 } from "native-base";
 import { dataProps } from "../src/lib/api";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 const CartItem = ({ ...props }: dataProps) => {
-  const [service, setService] = React.useState("1");
+  const [quantity, setQuantity] = React.useState(1);
+  const increaseQuantity = React.useCallback(() => {
+    setQuantity(quantity + 1);
+  }, [quantity]);
+
+  const decreaseQuantity = React.useCallback(() => {
+    if (quantity == 0) {
+      return;
+    } else setQuantity(quantity - 1);
+  }, [quantity]);
 
   return (
-    <HStack
-      w="100%"
-      space="3"
-      alignItems="center"
-      my="2"
-      pb="3"
-      borderBottomColor="gray.200"
-      borderBottomWidth="1"
-    >
-      <Image
-        resizeMode="stretch"
-        source={{ uri: props.image }}
-        alt={props.title}
-        style={styles.image}
-      />
-      <VStack w="72">
-        <Text fontSize="sm">{props.title}</Text>
-        <HStack space="3" alignItems="center">
-          <Text fontSize="lg" fontWeight="bold">
-            {" "}
-            ₵ {props.price}
+    <VStack px="2" borderBottomColor="gray.200" borderBottomWidth={2}>
+      <HStack
+        w="100%"
+        space="3"
+        alignItems="center"
+        my="2"
+
+        //borderBottomColor="gray.200"
+        // borderBottomWidth="1"
+      >
+        <Image
+          resizeMode="stretch"
+          source={{ uri: props.image }}
+          alt={props.title}
+          style={styles.image}
+        />
+
+        <Box flexDirection="column" width="80%" px="1" display="flex">
+          <Text flexWrap="wrap" fontSize="sm">
+            {props.title}
           </Text>
-          <Select
-            borderColor="#eab308"
-            borderWidth="2"
-            selectedValue={service}
-            w="24"
-            accessibilityLabel="Quantity"
-            placeholder="Qty"
-            _selectedItem={{
-              bg: "teal.600",
-              endIcon: (
-                <Ionicons name="ios-chevron-down" size={4} color="black" />
-              ),
+          <HStack space="3" alignItems="center">
+            <Text fontSize="lg" fontWeight="bold">
+              ₵ {props.price}
+            </Text>
+          </HStack>
+        </Box>
+      </HStack>
+      <HStack justifyContent="space-between" px="2" pb="2">
+        <Button
+          size="xs"
+          bg="transparent"
+          _text={{ fontSize: "xs" }}
+          variant="ghost"
+          leftIcon={<FontAwesome5 name="trash-alt" size={18} color="#eab308" />}
+        >
+          REMOVE
+        </Button>
+        <HStack justifyContent="space-between" w="30%" alignItems="center">
+          <IconButton
+            variant="solid"
+            bg="#eab308"
+            onPress={decreaseQuantity}
+            _pressed={{ backgroundColor: "#ca8a04" }}
+            size="sm"
+            _icon={{
+              as: Feather,
+              name: "minus",
             }}
-            mt={1}
-            onValueChange={(itemValue) => setService(itemValue)}
-          >
-            <Select.Item label="1" value="1" />
-            <Select.Item label="2" value="2" />
-            <Select.Item label="3" value="3" />
-            <Select.Item label="4" value="4" />
-            <Select.Item label="5" value="5" />
-          </Select>
-          <Button size="xs" w="27%">
-            Delete
-          </Button>
+          />
+          <Text fontSize="md">{quantity}</Text>
+          <IconButton
+            variant="solid"
+            bg="#eab308"
+            onPress={increaseQuantity}
+            _pressed={{ backgroundColor: "#ca8a04" }}
+            size="sm"
+            _icon={{
+              as: Feather,
+              name: "plus",
+            }}
+          />
         </HStack>
-      </VStack>
-    </HStack>
+      </HStack>
+    </VStack>
   );
 };
 
