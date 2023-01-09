@@ -2,8 +2,12 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { HStack } from "native-base";
 import CustomIconButton from "./CustomIconButton";
+import { ProductDetailToAuthStackList } from "../src/types";
+import { useNavigation } from "@react-navigation/native";
 
+type navigationParams = ProductDetailToAuthStackList["navigation"];
 const OptionsComponent = () => {
+  const navigation = useNavigation<navigationParams>();
   return (
     <HStack
       justifyContent="space-between"
@@ -25,6 +29,7 @@ const OptionsComponent = () => {
       <CustomIconButton
         name="Register"
         uri={require("../assets/icons/reg.png")}
+        onPress={() => navigation.navigate("Register")}
       />
       <CustomIconButton
         name="Notifications"

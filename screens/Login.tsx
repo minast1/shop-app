@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import React from "react";
 import {
   Box,
@@ -10,8 +10,10 @@ import {
   Icon,
   Image,
   Input,
+  KeyboardAvoidingView,
   Link,
   Pressable,
+  ScrollView,
   Text,
   View,
   VStack,
@@ -22,18 +24,24 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MaterialIcons } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
+import { ProductDetailToAuthStackList } from "../src/types";
+import { useNavigation } from "@react-navigation/native";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
   password: z.string().min(1, { message: "Please enter your password" }),
 });
 type loginSchema = z.infer<typeof loginSchema>;
+type navigationParams = ProductDetailToAuthStackList["navigation"];
 
 const Login = () => {
+  const navigation = useNavigation<navigationParams>();
   const [show, setShow] = React.useState(false);
+
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
@@ -44,18 +52,18 @@ const Login = () => {
   });
 
   const onSubmit = (data: loginSchema) => {
-    //const formData = getValues();
+    console.log(data);
+    reset();
   };
   return (
-    <View pt="3" flex={1} bg="white" alignItems="center">
+    <View pt="8" flex={1} bg="white" alignItems="center">
       <Center w="100%">
         <LottieView
           autoPlay
           style={{ width: 200, height: 200 }}
-          source={require("../assets/icons/lock.json")}
+          source={require("../assets/icons/login3.json")}
         />
-
-        <Box safeArea p="2" py="3" w="100%" maxW="350">
+        <ScrollView p="2" pb="3" w="100%" maxW="350" my="6">
           <Heading
             size="xl"
             fontWeight="600"
@@ -113,7 +121,7 @@ const Login = () => {
                 name="password"
                 render={({ field: { onChange, value } }) => (
                   <Input
-                    type="password"
+                    type={show ? "text" : "password"}
                     _input={{ fontSize: "lg" }}
                     InputRightElement={
                       <Pressable onPress={() => setShow(!show)}>
@@ -152,7 +160,7 @@ const Login = () => {
                 _text={{
                   fontSize: "xs",
                   fontWeight: "500",
-                  color: "black",
+                  color: "indigo.500",
                 }}
                 alignSelf="flex-end"
                 //mt="1"
@@ -179,13 +187,13 @@ const Login = () => {
                   fontWeight: "medium",
                   fontSize: "md",
                 }}
-                href="#"
+                onPress={() => navigation.navigate("Register")}
               >
                 Sign Up
               </Link>
             </HStack>
           </VStack>
-        </Box>
+        </ScrollView>
       </Center>
     </View>
   );

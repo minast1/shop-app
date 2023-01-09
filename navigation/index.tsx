@@ -50,7 +50,15 @@ function RootNavigator() {
           headerTintColor: "black",
         }}
       />
-      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen
+        name="Register"
+        component={Register}
+        options={{
+          headerShown: true,
+          headerLeftLabelVisible: false,
+          headerTintColor: "black",
+        }}
+      />
     </Stack.Navigator>
   );
 }
