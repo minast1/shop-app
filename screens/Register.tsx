@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ProductDetailToAuthStackList } from "../src/types";
 import { useNavigation } from "@react-navigation/native";
+import PasswordToggleInput from "../components/PasswordToggleInput";
 
 type navigationParams = ProductDetailToAuthStackList["navigation"];
 const registerSchema = z
@@ -242,9 +243,7 @@ const Register = () => {
             control={control}
             name="password"
             render={({ field: { onChange, value } }) => (
-              <Input
-                type="password"
-                _input={{ fontSize: "lg" }}
+              <PasswordToggleInput
                 mb={errors.email ? "0" : "5"}
                 isFocused={errors.password ? true : false}
                 onChangeText={(value) => onChange(value)}
@@ -271,9 +270,7 @@ const Register = () => {
             control={control}
             name="confirm"
             render={({ field: { onChange, value } }) => (
-              <Input
-                type="password"
-                _input={{ fontSize: "lg" }}
+              <PasswordToggleInput
                 mb={errors.email ? "0" : "10"}
                 isFocused={errors.confirm ? true : false}
                 onChangeText={(value) => onChange(value)}

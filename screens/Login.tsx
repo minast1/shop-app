@@ -26,6 +26,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import { ProductDetailToAuthStackList } from "../src/types";
 import { useNavigation } from "@react-navigation/native";
+import PasswordToggleInput from "../components/PasswordToggleInput";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
@@ -36,7 +37,6 @@ type navigationParams = ProductDetailToAuthStackList["navigation"];
 
 const Login = () => {
   const navigation = useNavigation<navigationParams>();
-  const [show, setShow] = React.useState(false);
 
   const {
     control,
@@ -120,23 +120,7 @@ const Login = () => {
                 control={control}
                 name="password"
                 render={({ field: { onChange, value } }) => (
-                  <Input
-                    type={show ? "text" : "password"}
-                    _input={{ fontSize: "lg" }}
-                    InputRightElement={
-                      <Pressable onPress={() => setShow(!show)}>
-                        <Icon
-                          as={
-                            <MaterialIcons
-                              name={show ? "visibility" : "visibility-off"}
-                            />
-                          }
-                          size={6}
-                          mr="2"
-                          color="muted.400"
-                        />
-                      </Pressable>
-                    }
+                  <PasswordToggleInput
                     mb={errors.password ? {} : "5"}
                     isFocused={errors.password ? true : false}
                     onChangeText={(value) => onChange(value)}
