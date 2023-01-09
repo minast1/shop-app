@@ -15,6 +15,8 @@ export type HomeStackParamList = {
 };
 export type RootParamList = {
   Root: undefined;
+  Login: undefined;
+  Register: undefined;
 };
 
 export type TabParamList = {
@@ -42,6 +44,11 @@ type MaterialTabsParamList = {
   Shoes: undefined;
   Others: undefined;
 };
+
+export type ProductDetailToAuthStackList = CompositeScreenProps<
+  StackScreenProps<RootParamList>,
+  StackScreenProps<CategoryStackList, "ProductDetail">
+>;
 
 export type CarouselToCatgoriesParamList = CompositeScreenProps<
   StackScreenProps<HomeStackParamList, "Home">,

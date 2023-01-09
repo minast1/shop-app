@@ -35,9 +35,21 @@ const Stack = createStackNavigator<{
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen name="Login" component={Login} />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Root"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerShown: true,
+          headerLeftLabelVisible: false,
+          headerTintColor: "black",
+        }}
+      />
       <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );

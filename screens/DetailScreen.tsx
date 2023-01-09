@@ -13,7 +13,11 @@ import {
 } from "native-base";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
-import { carouselDataType, CategoryStackList } from "../src/types";
+import {
+  carouselDataType,
+  CategoryStackList,
+  ProductDetailToAuthStackList,
+} from "../src/types";
 import { Feather } from "@expo/vector-icons";
 import Likes from "../components/Likes";
 import { FontAwesome } from "@expo/vector-icons";
@@ -24,11 +28,12 @@ import MainCarousel from "../components/MainCarousel";
 
 type StackProps = StackScreenProps<CategoryStackList, "ProductDetail">;
 type routeParams = StackProps["route"];
-type navigationParams = StackProps["navigation"];
+type navigationParams = ProductDetailToAuthStackList["navigation"];
 
 const DetailScreen = () => {
   const route = useRoute<routeParams>();
   const navigation = useNavigation<navigationParams>();
+  const user = null;
   const [selectedSize, setSize] = React.useState<string | null>();
   const { id, title, category, image, description, price } = route.params;
   const data: carouselDataType[] = Array.from({ length: 4 }, (item, index) => {
@@ -158,16 +163,16 @@ const DetailScreen = () => {
               _text={{ fontSize: "md" }}
               onPress={() => {
                 //if user is logged in
-                updateCart.mutate({
-                  id,
-                  title,
-                  category,
-                  image,
-                  description,
-                  price,
-                });
-                //else
-                //navigation.navigate()
+                user
+                  ? updateCart.mutate({
+                      id,
+                      title,
+                      category,
+                      image,
+                      description,
+                      price,
+                    })
+                  : navigation.navigate("Login");
               }}
             >
               Add To Cart
