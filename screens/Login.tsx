@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -14,6 +14,7 @@ import {
   Link,
   Pressable,
   ScrollView,
+  Spinner,
   Text,
   View,
   VStack,
@@ -27,6 +28,8 @@ import LottieView from "lottie-react-native";
 import { ProductDetailToAuthStackList } from "../src/types";
 import { useNavigation } from "@react-navigation/native";
 import PasswordToggleInput from "../components/PasswordToggleInput";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../src/lib/firebaseConfig";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
@@ -37,6 +40,7 @@ type navigationParams = ProductDetailToAuthStackList["navigation"];
 
 const Login = () => {
   const navigation = useNavigation<navigationParams>();
+  const [loading, setLoading] = useState(false);
 
   const {
     control,
@@ -52,8 +56,16 @@ const Login = () => {
   });
 
   const onSubmit = (data: loginSchema) => {
-    console.log(data);
-    reset();
+    setLoading(true);
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((res) => {
+        setLoading(false);
+        navigation.goBack();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // reset();
   };
   return (
     <View pt="8" flex={1} bg="white" alignItems="center">
@@ -153,7 +165,11 @@ const Login = () => {
               </Link>
             </FormControl>
             <Button mt="2" onPress={handleSubmit(onSubmit)}>
-              Sign in
+              {loading ? (
+                <Spinner accessibilityLabel="Submiting" color="gray" />
+              ) : (
+                " Sign in"
+              )}
             </Button>
             <HStack mt="6" justifyContent="center">
               <Text

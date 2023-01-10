@@ -35,6 +35,7 @@ const DetailScreen = () => {
   const route = useRoute<routeParams>();
   const navigation = useNavigation<navigationParams>();
   const authUser = useContext(userContext);
+  console.log(authUser?.email);
   const [selectedSize, setSize] = React.useState<string | null>();
   const { id, title, category, image, description, price } = route.params;
   const data: carouselDataType[] = Array.from({ length: 4 }, (item, index) => {

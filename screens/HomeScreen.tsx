@@ -7,6 +7,7 @@ import ContactBox from "../components/ContactBox";
 import OptionsComponent from "../components/OptionsComponent";
 import Notification from "../components/Notification";
 import { carouselDataType } from "../src/types";
+import Constants from "expo-constants";
 
 const HomeScreen = () => {
   const data: carouselDataType[] = [
@@ -15,7 +16,7 @@ const HomeScreen = () => {
     { image: { uri: require("../assets/images/bg2.webp") }, name: "Shoes" },
     { image: { uri: require("../assets/images/shoe.jpeg") }, name: "Others" },
   ];
-
+  //console.log(Constants.expoConfig?.extra?.firebaseApiKey);
   return (
     <>
       <VStack flex={1} mt={16} mx="3" space="5" pb="8">
