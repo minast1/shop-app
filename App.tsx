@@ -11,10 +11,12 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { AppStateStatus, Platform } from "react-native";
-import React from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 import { useAppState } from "./hooks/useAppState";
 import theme from "./src/theme";
+import { User } from "firebase/auth";
+import { auth } from "./src/lib/firebaseConfig";
 
 const client = new QueryClient({
   defaultOptions: { queries: { retry: 2 } },
@@ -41,6 +43,7 @@ export default function App() {
         <NativeBaseProvider theme={theme}>
           <SafeAreaProvider>
             <Navigation />
+
             <StatusBar style="dark" />
           </SafeAreaProvider>
         </NativeBaseProvider>

@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
@@ -9,8 +9,31 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import { combinedTypes, RootParamList } from "../src/types";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
+import { User } from "firebase/auth";
+import { auth } from "../src/lib/firebaseConfig";
+import { firebaseUser, userContext } from "../src/lib/context";
 
 const Navigation = () => {
+  const [initializing, setInitializing] = useState(true);
+  const [listenUser, setListenUser] = useState(false);
+  const [user, setUser] = useState<firebaseUser>(null);
+
+  useEffect(() => {
+    const authListener = auth.onAuthStateChanged((result) => {
+      setUser(result);
+      if (initializing && !listenUser) {
+        setInitializing(false);
+        setListenUser(true);
+      }
+    });
+
+    return () => {
+      if (authListener) {
+        authListener();
+      }
+    };
+  }, [initializing, listenUser]);
+
   const navTheme = {
     ...DefaultTheme,
     colors: {
@@ -20,7 +43,9 @@ const Navigation = () => {
   };
   return (
     <NavigationContainer theme={navTheme}>
-      <RootNavigator />
+      <userContext.Provider value={user}>
+        <RootNavigator />
+      </userContext.Provider>
     </NavigationContainer>
   );
 };

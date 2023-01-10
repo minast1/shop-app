@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Button,
@@ -25,6 +25,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { dataProps, getUserCart } from "../src/lib/api";
 import CartTotal from "../components/CartTotal";
 import MainCarousel from "../components/MainCarousel";
+import { userContext } from "../src/lib/context";
 
 type StackProps = StackScreenProps<CategoryStackList, "ProductDetail">;
 type routeParams = StackProps["route"];
@@ -33,7 +34,7 @@ type navigationParams = ProductDetailToAuthStackList["navigation"];
 const DetailScreen = () => {
   const route = useRoute<routeParams>();
   const navigation = useNavigation<navigationParams>();
-  const user = null;
+  const authUser = useContext(userContext);
   const [selectedSize, setSize] = React.useState<string | null>();
   const { id, title, category, image, description, price } = route.params;
   const data: carouselDataType[] = Array.from({ length: 4 }, (item, index) => {
@@ -163,7 +164,7 @@ const DetailScreen = () => {
               _text={{ fontSize: "md" }}
               onPress={() => {
                 //if user is logged in
-                user
+                authUser
                   ? updateCart.mutate({
                       id,
                       title,
