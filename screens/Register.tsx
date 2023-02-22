@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   FormControl,
@@ -8,6 +8,7 @@ import {
   Input,
   KeyboardAvoidingView,
   ScrollView,
+  Spinner,
   View,
   WarningOutlineIcon,
 } from "native-base";
@@ -18,6 +19,8 @@ import { z } from "zod";
 import { ProductDetailToAuthStackList } from "../src/types";
 import { useNavigation } from "@react-navigation/native";
 import PasswordToggleInput from "../components/PasswordToggleInput";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../src/lib/firebaseConfig";
 
 type navigationParams = ProductDetailToAuthStackList["navigation"];
 const registerSchema = z
@@ -40,6 +43,9 @@ const registerSchema = z
       });
     }
   });
+
+//HANDLE DUPLICATE ACCOUNT CREATION ERROR FROM FIREBASE
+
 type registerSchema = z.infer<typeof registerSchema>;
 const Register = () => {
   const navigation = useNavigation<navigationParams>();
@@ -60,15 +66,24 @@ const Register = () => {
     },
   });
   const [success, setSuccess] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (data: registerSchema) => {
-    console.log(data);
-    setSuccess(true);
-    setTimeout(() => {
-      //reset(); activate it when everything works
-      setSuccess(false);
-      navigation.navigate("Login");
-    }, 4000);
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, data.email, data.password).then(
+      (userCredential) => {
+        //userCredential.user.
+        //1. trigger mutation to save user details in db
+        //2. On success
+        setLoading(false);
+        setSuccess(true);
+        setTimeout(() => {
+          //reset(); activate it when everything works
+          setSuccess(false);
+          navigation.goBack();
+        }, 4000);
+      }
+    );
   };
   if (success)
     return (
@@ -297,7 +312,11 @@ const Register = () => {
           w="100%"
           onPress={handleSubmit(onSubmit)}
         >
-          Sign up
+          {loading ? (
+            <Spinner accessibilityLabel="Submiting" color="gray" />
+          ) : (
+            " Sign up"
+          )}
         </Button>
       </KeyboardAvoidingView>
     </ScrollView>

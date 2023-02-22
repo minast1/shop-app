@@ -30,6 +30,7 @@ import { useNavigation } from "@react-navigation/native";
 import PasswordToggleInput from "../components/PasswordToggleInput";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../src/lib/firebaseConfig";
+import { FirebaseError } from "firebase/app";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
@@ -41,11 +42,11 @@ type navigationParams = ProductDetailToAuthStackList["navigation"];
 const Login = () => {
   const navigation = useNavigation<navigationParams>();
   const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState(false);
 
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
@@ -56,14 +57,16 @@ const Login = () => {
   });
 
   const onSubmit = (data: loginSchema) => {
+    setServerError(false);
     setLoading(true);
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((res) => {
         setLoading(false);
         navigation.goBack();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((error: any) => {
+        setServerError(true);
+        setLoading(false);
       });
     // reset();
   };
@@ -100,6 +103,19 @@ const Login = () => {
 
           <VStack space={3} mt="5">
             <FormControl isInvalid={errors.email ? true : false}>
+              {serverError && (
+                <HStack
+                  space="1"
+                  justifyContent="center"
+                  alignItems="center"
+                  mb="3"
+                >
+                  <WarningOutlineIcon size="sm" style={{ color: "red" }} />
+                  <Text fontSize="md" color="red.500">
+                    user account doesn't exist
+                  </Text>
+                </HStack>
+              )}
               <Controller
                 control={control}
                 name="email"
@@ -114,6 +130,7 @@ const Login = () => {
                   />
                 )}
               />
+
               {errors.email?.message && (
                 <FormControl.ErrorMessage
                   mb="5"

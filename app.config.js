@@ -6,6 +6,11 @@ export default {
     name: "Modest",
     slug: "modest-app",
     privacy: "public",
+    splash: {
+      image: "./assets/images/splash.png",
+      resizeMode: "contain",
+      backgroundColor: "#000000",
+    },
     description: "Modest by Asmay online shop",
     owner: "eddy-modest",
     assetBundlePatterns: ["**/*"],

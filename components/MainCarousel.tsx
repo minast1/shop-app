@@ -18,7 +18,7 @@ const MainCarousel = ({ carouselData }: Props) => {
   return (
     <Carousel
       width={width * 0.94}
-      height={route.name === "Home" ? width / 1.8 : width / 1.3}
+      height={route.name === "Home" ? width / 2.0 : width / 1.3}
       pagingEnabled={true}
       style={{ borderRadius: 8, marginTop: route.name === "Home" ? 25 : 10 }}
       scrollAnimationDuration={1000}

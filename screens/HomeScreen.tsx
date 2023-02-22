@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import React from "react";
-import { Pressable, View, VStack } from "native-base";
+import { Pressable, ScrollView, Text, View, VStack } from "native-base";
 import Searchbar from "../components/Searchbar";
 import MainCarousel from "../components/MainCarousel";
 import ContactBox from "../components/ContactBox";
@@ -18,18 +18,18 @@ const HomeScreen = () => {
   ];
   //console.log(Constants.expoConfig?.extra?.firebaseApiKey);
   return (
-    <>
-      <VStack flex={1} mt={16} mx="3" space="5" pb="8">
+    <ScrollView flex={1}>
+      <VStack mt={16} mx="3" space="2" pb="5">
         <Searchbar />
 
         <MainCarousel carouselData={data} />
         <ContactBox />
       </VStack>
+      <OptionsComponent />
       <View bg="gray.200" flex={1}>
-        <OptionsComponent />
         <Notification />
       </View>
-    </>
+    </ScrollView>
   );
 };
 

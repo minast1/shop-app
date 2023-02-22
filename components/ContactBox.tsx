@@ -9,6 +9,7 @@ const ContactBox = () => {
     <HStack
       py="2"
       space="2"
+      mt="3"
       px="2"
       borderRadius="4"
       style={{
