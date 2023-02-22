@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { HStack } from "native-base";
-import CustomIconButton from "./CustomIconButton";
+import CategoryShortcut from "./CategoryShortcut";
 import { ProductDetailToAuthStackList } from "../src/types";
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,30 +10,44 @@ const OptionsComponent = () => {
   const navigation = useNavigation<navigationParams>();
   return (
     <HStack
-      justifyContent="space-between"
-      my="3"
-      shadow="1"
-      mx="3"
-      bg="white"
-      p="3"
-      borderRadius="lg"
+      // justifyContent="space-between"
+      py="4"
+      bg="#fefce8"
+      px="2"
+      flexWrap="wrap"
     >
-      <CustomIconButton
-        name="Chat"
-        uri={require("../assets/icons/watsie.png")}
+      <CategoryShortcut
+        name="Shoes"
+        mb="5"
+        mr="8"
+        uri={require("../assets/images/shoes.png")}
+        onPress={() => navigation.navigate("CategoriesTab")}
       />
-      <CustomIconButton
-        name="Invite"
-        uri={require("../assets/icons/invite.png")}
+      <CategoryShortcut
+        name="Bags"
+        uri={require("../assets/images/bags.png")}
+        mb="5"
+        mr="8"
       />
-      <CustomIconButton
-        name="Register"
-        uri={require("../assets/icons/reg.png")}
-        onPress={() => navigation.navigate("Register")}
+      <CategoryShortcut
+        name="Clothes"
+        uri={require("../assets/images/accessories.png")}
+        //onPress={() => navigation.navigate("Register")}
+        mb="5"
       />
-      <CustomIconButton
-        name="Notifications"
-        uri={require("../assets/icons/noti.png")}
+      <CategoryShortcut
+        name="Others"
+        uri={require("../assets/images/others.png")}
+        mr="8"
+      />
+      <CategoryShortcut
+        name="Accessories"
+        uri={require("../assets/images/clothes.png")}
+        mr="8"
+      />
+      <CategoryShortcut
+        name="Fashion"
+        uri={require("../assets/images/fashion.png")}
       />
     </HStack>
   );
