@@ -26,9 +26,8 @@ const HomeScreen = () => {
         <ContactBox />
       </VStack>
       <OptionsComponent />
-      <View bg="gray.200" flex={1}>
-        <Notification />
-      </View>
+
+      <Notification />
     </ScrollView>
   );
 };

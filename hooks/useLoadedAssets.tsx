@@ -41,6 +41,12 @@ const useLoadedAssets = () => {
 
         const imageAssets = cacheImages([
           require("../assets/images/fash1.jpg"),
+          require("../assets/images/accessories.png"),
+          require("../assets/images/bags.png"),
+          require("../assets/images/bg.webp"),
+          require("../assets/images/clothes.png"),
+          require("../assets/images/fashion.png"),
+          require("../assets/images/others.png"),
           require("../assets/images/shoe.jpeg"),
           require("../assets/images/bg.webp"),
           require("../assets/images/bg2.webp"),

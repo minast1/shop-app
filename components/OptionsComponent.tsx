@@ -31,7 +31,7 @@ const OptionsComponent = () => {
       />
       <CategoryShortcut
         name="Clothes"
-        uri={require("../assets/images/accessories.png")}
+        uri={require("../assets/images/skit.png")}
         //onPress={() => navigation.navigate("Register")}
         mb="5"
       />
@@ -42,7 +42,7 @@ const OptionsComponent = () => {
       />
       <CategoryShortcut
         name="Accessories"
-        uri={require("../assets/images/clothes.png")}
+        uri={require("../assets/images/fa2.png")}
         mr="8"
       />
       <CategoryShortcut
