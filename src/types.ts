@@ -1,6 +1,9 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
-import { CompositeScreenProps } from "@react-navigation/native";
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
 import {
   createStackNavigator,
   StackScreenProps,
@@ -45,14 +48,22 @@ type MaterialTabsParamList = {
   Others: undefined;
 };
 
-export type ProductDetailToAuthStackList = CompositeScreenProps<
+export type HomeToCategoriesStackList = CompositeScreenProps<
   StackScreenProps<RootParamList>,
-  StackScreenProps<CategoryStackList, "ProductDetail">
+  BottomTabScreenProps<MaterialTabsParamList>
+>;
+
+export type HomeToCategoryTopTab = CompositeScreenProps<
+  StackScreenProps<RootParamList>,
+  BottomTabScreenProps<TabParamList, "Categories">
 >;
 
 export type CarouselToCatgoriesParamList = CompositeScreenProps<
-  StackScreenProps<HomeStackParamList, "Home">,
-  MaterialTopTabScreenProps<MaterialTabsParamList>
+  BottomTabScreenProps<TabParamList, "Categories">,
+  CompositeScreenProps<
+    StackScreenProps<CategoryStackList>,
+    MaterialTopTabScreenProps<MaterialTabsParamList>
+  >
 >;
 
 export type CategoryStackList = {
