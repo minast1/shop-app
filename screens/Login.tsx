@@ -30,7 +30,6 @@ import { useNavigation } from "@react-navigation/native";
 import PasswordToggleInput from "../components/PasswordToggleInput";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../src/lib/firebaseConfig";
-import { FirebaseError } from "firebase/app";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
