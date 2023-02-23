@@ -1,9 +1,6 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
-import {
-  CompositeScreenProps,
-  NavigatorScreenParams,
-} from "@react-navigation/native";
+import { CompositeScreenProps } from "@react-navigation/native";
 import {
   createStackNavigator,
   StackScreenProps,
@@ -47,6 +44,11 @@ type MaterialTabsParamList = {
   Shoes: undefined;
   Others: undefined;
 };
+
+export type ProductDetailToAuthStackList = CompositeScreenProps<
+  StackScreenProps<RootParamList>,
+  StackScreenProps<CategoryStackList, "ProductDetail">
+>;
 
 export type HomeToCategoriesStackList = CompositeScreenProps<
   StackScreenProps<RootParamList>,

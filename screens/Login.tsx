@@ -71,7 +71,13 @@ const Login = () => {
     // reset();
   };
   return (
-    <View pt="8" flex={1} bg="white" alignItems="center">
+    <View
+      pt="8"
+      flex={1}
+      bg="white"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Center w="100%">
         <LottieView
           autoPlay

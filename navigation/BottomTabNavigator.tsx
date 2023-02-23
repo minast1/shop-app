@@ -2,10 +2,8 @@ import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
-import ProfileScreen from "../screens/ProfileScreen";
 import CartScreen from "../screens/CartScreen";
 import SearchResultsScreen from "../screens/SearchResultsScreen";
 import { TabParamList } from "../src/types";
@@ -15,6 +13,8 @@ import BagsScreen from "../screens/BagsScreen";
 import OthersScreen from "../screens/OthersScreen";
 import DetailScreen from "../screens/DetailScreen";
 import AccessoriesScreen from "../screens/AccessoriesScreen";
+import Login from "../screens/Login";
+import { Feather } from "@expo/vector-icons";
 
 const BottomTab = createBottomTabNavigator<TabParamList>();
 
@@ -67,8 +67,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        name="Me"
-        component={ProfileScreen}
+        name="Login"
+        component={Login}
         options={{
           tabBarActiveTintColor: "#eab308",
           tabBarLabelStyle: {
@@ -78,9 +78,9 @@ const BottomTabNavigator = () => {
 
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <FontAwesome5 name="user-alt" size={24} color="#eab308" />
+              <Feather name="lock" size={24} color="#eab308" />
             ) : (
-              <FontAwesome5 name="user" size={24} color="black" />
+              <Feather name="lock" size={24} color="black" />
             ),
         }}
       />
